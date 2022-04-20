@@ -1,15 +1,3 @@
-"""
-MODEL CLASS
-
-should implement:
-
-fit
-predict
-evaluate/score --> depending on a flag that's passed in, gets the:
-    accuracy
-    error (aka 1-acc)
-    precision + recall
-"""
 from collections import Counter
 
 import numpy
