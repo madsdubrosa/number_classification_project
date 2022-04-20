@@ -1,10 +1,6 @@
-"""
-Refactor project 3's code using your model class (parts a-c)
-"""
-
 import numpy
 from sklearn.model_selection import KFold
-from homework.machine_learning.project_3.project_3_refactored.model import SVM
+from model import SVM
 import matplotlib.pyplot as plt
 
 def read_data(filename):
@@ -19,8 +15,6 @@ def normalize_data(content):
 
     for i in range(len(content)):
         label = int(content[i][0])
-        # if label not in [1, 2]:
-        #     continue
         y_data.append(label)
         vector_content = content[i][2:]
         vector = vector_content.split(",")
@@ -36,10 +30,9 @@ def cross_validation(content, k, estimator):
 
     content = numpy.array(content)
 
-    for train_index, test_index in fold.split(content):  # fold.split(content) --> train_index, test_index
-        train_data = content[train_index]  # list comprehension if python list
-        test_data = content[test_index]  # list comprehension if python list
-        # print(content[j])
+    for train_index, test_index in fold.split(content):  
+        train_data = content[train_index]  
+        test_data = content[test_index]  
 
         x_train, y_train = normalize_data(train_data)
         x_val, y_val = normalize_data(test_data)
@@ -53,8 +46,7 @@ def cross_validation(content, k, estimator):
 
 
 def main():
-    # filename = "/Users/mo/src-control/projects/kwellerprep/privates/maddie/maddie-coding/homework/machine_learning/project_3/mnist_train.txt"
-    filename = "/Users/ldubrosa/maddie-coding/homework/machine_learning/project_3/mnist_train.txt"
+    filename = "mnist_train.txt"
 
     content = read_data(filename)
     # train = content[:1750]  # [784, 1]
@@ -112,8 +104,7 @@ def main():
     train_err = svm.get_score(y_train, train_pred, "recall")
     print(f"train_err = {sorted(train_err, key=lambda x: x[0])}")
 
-    # filename = "/Users/mo/src-control/projects/kwellerprep/privates/maddie/maddie-coding/homework/machine_learning/project_3/mnist_test.txt"
-    filename = "/Users/ldubrosa/maddie-coding/homework/machine_learning/project_3/mnist_test.txt"
+    filename = "mnist_test.txt"
     test = read_data(filename)
     x_test, y_test = normalize_data(test)
     test_pred = svm.predict_class(x_test)
